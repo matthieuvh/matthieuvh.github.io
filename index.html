@@ -343,7 +343,7 @@
 </nav>
 
 <script src="data.js" defer></script>
-<script defer>
+<script>
 // ── State ──────────────────────────────────
 const FAV_KEY = 'ai_favs_v2';
 let favs = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
@@ -596,9 +596,6 @@ document.getElementById('modal-overlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeModal();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-// ── Init ─────────────────────────────────
-renderCards();
 
 // ── Service Worker ────────────────────────
 if ('serviceWorker' in navigator) {
