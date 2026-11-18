@@ -31,7 +31,8 @@
   /* ── HEADER ── */
   header {
     background: #fff; border-bottom: 1px solid var(--border);
-    padding: 12px 20px; position: sticky; top: 0; z-index: 20;
+    padding: 12px 20px; padding-top: calc(12px + env(safe-area-inset-top, 0px));
+    position: sticky; top: 0; z-index: 20;
     display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   }
   header h1 { font-size: 1.2rem; font-weight: 700; flex: 0 0 auto; white-space: nowrap; }
@@ -145,6 +146,7 @@
   .modal {
     background: #fff; border-radius: 16px; max-width: 680px; width: 100%;
     max-height: 90vh; overflow-y: auto; animation: slideUp .2s ease;
+    transition: transform .22s ease;
   }
   @keyframes slideUp { from { opacity:0; transform:translateY(16px);} to {opacity:1; transform:none;} }
   .modal-img-wrap { position: relative; }
@@ -596,6 +598,32 @@ document.getElementById('modal-overlay').addEventListener('click', e => {
   if (e.target === e.currentTarget) closeModal();
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── Swipe droite pour fermer la modal ────
+(function() {
+  let tx = 0, ty = 0;
+  const modal = document.getElementById('modal');
+  modal.addEventListener('touchstart', e => {
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+    modal.style.transition = 'none';
+  }, { passive: true });
+  modal.addEventListener('touchmove', e => {
+    const dx = e.touches[0].clientX - tx;
+    const dy = Math.abs(e.touches[0].clientY - ty);
+    if (dx > 0 && dy < 60) modal.style.transform = `translateX(${dx}px)`;
+  }, { passive: true });
+  modal.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    modal.style.transition = '';
+    if (dx > 80) {
+      modal.style.transform = 'translateX(100%)';
+      setTimeout(() => { closeModal(); modal.style.transform = ''; }, 220);
+    } else {
+      modal.style.transform = '';
+    }
+  }, { passive: true });
+})();
 
 // ── Service Worker ────────────────────────
 if ('serviceWorker' in navigator) {
