@@ -275,7 +275,7 @@
 
 <div class="filter-row">
   <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
-    <button class="filter-btn ai-active" id="btn-ai" onclick="toggleAI()">🌿 Anti-inflam</button>
+    <button class="filter-btn" id="btn-ai" onclick="toggleAI()">🌿 Anti-inflam</button>
     <div class="filter-sep"></div>
     <button class="filter-btn active" data-filter="time" data-max="9999">⏱ Tout</button>
     <button class="filter-btn" data-filter="time" data-max="15">≤ 15 min</button>
@@ -352,7 +352,7 @@ let filterMeal = 'all';
 let maxTime = 9999;
 let filterPrice = 'all';
 const AI_THRESHOLD = 4;  // Score MIND Diet minimum
-let onlyAI = true;
+let onlyAI = false;
 let onlyFavs = false;
 let sortMode = 'default';
 let currentIdx = null;
