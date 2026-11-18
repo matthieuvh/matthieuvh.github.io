@@ -1,7 +1,7 @@
 {
-  "name": "Recettes Anti-Inflam",
+  "name": "Recettes",
   "short_name": "Recettes",
-  "description": "Catalogue de recettes anti-inflammatoires — Matin, Midi, Soir",
+  "description": "Catalogue de recettes — Matin, Midi, Soir",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8faf8",
